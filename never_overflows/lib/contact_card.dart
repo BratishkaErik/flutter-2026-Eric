@@ -19,6 +19,7 @@ class ContactCard extends StatelessWidget {
             Stack(
               clipBehavior: Clip.none,
               children: [
+                CircleAvatar(child: Text(contact.initial)),
                 if (contact.unread > 0)
                   Positioned(
                     right: -2,
@@ -46,7 +47,6 @@ class ContactCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                CircleAvatar(child: Text(contact.initial)),
               ],
             ),
             const SizedBox(width: 12),
