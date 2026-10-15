@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:screens_lead/routes.dart';
+import 'package:screens_lead/students.dart';
 
+import 'detail_screen.dart';
+import 'edit_screen.dart';
 import 'students_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -12,6 +16,23 @@ class MyApp extends StatelessWidget {
     theme: ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
     ),
-    home: const StudentsScreen(),
+    initialRoute: Routes.students,
+    routes: {Routes.students: (_) => const StudentsScreen()},
+    onGenerateRoute: (settings) {
+      switch (settings.name) {
+        case Routes.student:
+          final student = settings.arguments as Student;
+          return MaterialPageRoute(
+            builder: (_) => DetailScreen(student: student),
+          );
+        case Routes.edit:
+          final student = settings.arguments as Student;
+          return MaterialPageRoute<String>(
+            builder: (_) => EditScreen(student: student),
+          );
+        default:
+          return null;
+      }
+    },
   );
 }
