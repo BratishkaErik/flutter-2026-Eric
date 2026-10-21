@@ -206,8 +206,10 @@ class _ProfileTabState extends State<ProfileTab> {
                   focusNode: _groupFocusNode,
                   textInputAction: TextInputAction.done,
                   decoration: const InputDecoration(
-                    labelText: 'Tester Group Code',
+                    labelText: 'Tester Group Code (Optional)',
                     hintText: 'e.g. QA-2026, DEV-01',
+                    helperText: 'Optional. 2-10 uppercase letters, numbers, or hyphens (e.g. QA-2026, CS-2101)',
+                    helperMaxLines: 2,
                     prefixIcon: Icon(Icons.badge_outlined),
                   ),
                   onTapOutside: (_) => FocusScope.of(context).unfocus(),
@@ -215,7 +217,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   validator: (value) {
                     final text = value?.trim() ?? '';
                     if (text.isEmpty) {
-                      return 'Group code is required';
+                      return null;
                     }
                     if (!_groupRegExp.hasMatch(text)) {
                       return 'Must be 2–10 uppercase letters, numbers, or hyphens (e.g. QA-2026)';
