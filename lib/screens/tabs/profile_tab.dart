@@ -247,8 +247,14 @@ class _ProfileTabState extends State<ProfileTab> {
             spacing: 10.0,
             children: [
               ChoiceChip(
-                avatar: const Icon(Icons.brightness_auto, size: 18),
-                label: const Text('System'),
+                label: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.brightness_auto, size: 18),
+                    SizedBox(width: 6),
+                    Text('System'),
+                  ],
+                ),
                 selected: widget.themeMode == ThemeMode.system,
                 onSelected: (selected) {
                   if (selected) {
@@ -257,8 +263,14 @@ class _ProfileTabState extends State<ProfileTab> {
                 },
               ),
               ChoiceChip(
-                avatar: const Icon(Icons.light_mode, size: 18),
-                label: const Text('Light'),
+                label: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.light_mode, size: 18),
+                    SizedBox(width: 6),
+                    Text('Light'),
+                  ],
+                ),
                 selected: widget.themeMode == ThemeMode.light,
                 onSelected: (selected) {
                   if (selected) {
@@ -267,8 +279,14 @@ class _ProfileTabState extends State<ProfileTab> {
                 },
               ),
               ChoiceChip(
-                avatar: const Icon(Icons.dark_mode, size: 18),
-                label: const Text('Dark'),
+                label: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.dark_mode, size: 18),
+                    SizedBox(width: 6),
+                    Text('Dark'),
+                  ],
+                ),
                 selected: widget.themeMode == ThemeMode.dark,
                 onSelected: (selected) {
                   if (selected) {

@@ -105,9 +105,12 @@ class AppDrawer extends StatelessWidget {
                   radius: 28,
                   backgroundColor: theme.colorScheme.primary,
                   foregroundColor: theme.colorScheme.onPrimary,
-                  child: Icon(
-                    hasProfile ? Icons.person : Icons.person_outline,
-                    size: 32,
+                  child: Text(
+                    hasProfile ? profile.name[0].toUpperCase() : '?',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      color: theme.colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),

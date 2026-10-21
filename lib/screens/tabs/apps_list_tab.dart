@@ -129,8 +129,14 @@ class _AppsListTabState extends State<AppsListTab> {
               const SizedBox(width: 8),
               for (final cat in AppCategory.values) ...[
                 ChoiceChip(
-                  avatar: Icon(cat.icon, size: 16),
-                  label: Text(cat.label),
+                  label: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(cat.icon, size: 16),
+                      const SizedBox(width: 6),
+                      Text(cat.label),
+                    ],
+                  ),
                   selected: _selectedCategory == cat,
                   onSelected: (selected) {
                     setState(() {
@@ -141,8 +147,14 @@ class _AppsListTabState extends State<AppsListTab> {
                 const SizedBox(width: 8),
               ],
               FilterChip(
-                avatar: const Icon(Icons.history, size: 16),
-                label: const Text('Released Only'),
+                label: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.history, size: 16),
+                    SizedBox(width: 6),
+                    Text('Released Only'),
+                  ],
+                ),
                 selected: _showPastOnly,
                 onSelected: (selected) {
                   setState(() {

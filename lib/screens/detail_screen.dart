@@ -177,6 +177,23 @@ class _DetailScreenState extends State<DetailScreen> {
 
     final (:taken, :free) = _app.places;
 
+    final double progressValue = _app.limit > 0
+        ? (taken / _app.limit).clamp(0.0, 1.0)
+        : 0.0;
+
+    final Color progressColor;
+    final String statusLabel;
+    if (_app.isFull) {
+      progressColor = theme.colorScheme.error;
+      statusLabel = 'FULL';
+    } else if (free <= 5) {
+      progressColor = theme.colorScheme.tertiary;
+      statusLabel = '$free spots left';
+    } else {
+      progressColor = theme.colorScheme.primary;
+      statusLabel = '$free available';
+    }
+
     final VoidCallback? primaryAction;
     final String primaryButtonLabel;
     if (isRegistered) {
@@ -306,7 +323,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 const Tab(icon: Icon(Icons.info_outline), text: 'Overview'),
                 Tab(
                   icon: const Icon(Icons.group_outlined),
-                  text: 'Testers (${_app.count})',
+                  text: 'Testers ($taken/${_app.limit})',
                 ),
               ],
             ),
@@ -345,15 +362,95 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           subtitle: Text(_app.location),
                         ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(
-                            Icons.pie_chart_outline,
-                            color: theme.colorScheme.primary,
-                          ),
-                          title: const Text('Beta Tester Capacity'),
-                          subtitle: Text(
-                            '$taken taken · $free free of ${_app.limit} total seats',
+                        Card(
+                          elevation: 0,
+                          color: theme.colorScheme.surfaceContainerLow,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.pie_chart_outline,
+                                          size: 20,
+                                          color: progressColor,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          'Beta Tester Capacity',
+                                          style: theme.textTheme.titleMedium
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: progressColor.withAlpha(35),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Text(
+                                        statusLabel,
+                                        style: theme.textTheme.labelSmall
+                                            ?.copyWith(
+                                              color: progressColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 12),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: LinearProgressIndicator(
+                                    value: progressValue,
+                                    minHeight: 8,
+                                    backgroundColor: theme
+                                        .colorScheme
+                                        .surfaceContainerHighest,
+                                    color: progressColor,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '$taken of ${_app.limit} testers enrolled',
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            color: theme
+                                                .colorScheme
+                                                .onSurfaceVariant,
+                                          ),
+                                    ),
+                                    Text(
+                                      '$free free',
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            color: theme
+                                                .colorScheme
+                                                .onSurfaceVariant,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         if (_app.description case final desc?) ...[
