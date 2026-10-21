@@ -32,7 +32,7 @@ class _ProfileTabState extends State<ProfileTab> {
   late final FocusNode _nameFocusNode;
   late final FocusNode _groupFocusNode;
 
-  static final RegExp _groupRegExp = RegExp(r'^[A-Z0-9\-]{2,10}$');
+  static final RegExp _groupRegExp = RegExp(r'^[A-Za-z0-9\-]{2,10}$');
 
   @override
   void initState() {
@@ -72,7 +72,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
     final updated = widget.profile.copyWith(
       name: _nameController.text.trim(),
-      group: _groupController.text.trim(),
+      group: _groupController.text.trim().toUpperCase(),
     );
 
     widget.onUpdateProfile(updated);
@@ -208,7 +208,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   decoration: const InputDecoration(
                     labelText: 'Tester Group Code (Optional)',
                     hintText: 'e.g. QA-2026, DEV-01',
-                    helperText: 'Optional. 2-10 uppercase letters, numbers, or hyphens (e.g. QA-2026, CS-2101)',
+                    helperText: 'Optional. Letter-number format (e.g. QA-2026, CS-21). Can be updated at any time.',
                     helperMaxLines: 2,
                     prefixIcon: Icon(Icons.badge_outlined),
                   ),
@@ -220,7 +220,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       return null;
                     }
                     if (!_groupRegExp.hasMatch(text)) {
-                      return 'Must be 2–10 uppercase letters, numbers, or hyphens (e.g. QA-2026)';
+                      return 'Use letter-number format (e.g. QA-2026, CS-21)';
                     }
                     return null;
                   },

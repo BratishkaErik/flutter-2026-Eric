@@ -177,13 +177,18 @@ class _DetailScreenState extends State<DetailScreen> {
 
     final (:taken, :free) = _app.places;
 
-    final VoidCallback? primaryAction = isRegistered
-        ? _handlePrimaryAction
-        : (isFull ? null : _handlePrimaryAction);
-
-    final primaryButtonLabel = isRegistered
-        ? 'Leave Beta'
-        : (isFull ? 'Beta Slots Full' : 'Join Beta');
+    final VoidCallback? primaryAction;
+    final String primaryButtonLabel;
+    if (isRegistered) {
+      primaryAction = _handlePrimaryAction;
+      primaryButtonLabel = 'Leave Beta';
+    } else if (isFull) {
+      primaryAction = null;
+      primaryButtonLabel = 'Beta Slots Full';
+    } else {
+      primaryAction = _handlePrimaryAction;
+      primaryButtonLabel = 'Join Beta';
+    }
 
     return DefaultTabController(
       length: 2,
@@ -393,6 +398,24 @@ class _DetailScreenState extends State<DetailScreen> {
                                     widget.arguments.profile.name
                                         .trim()
                                         .toLowerCase();
+                            final userGroup = widget.arguments.profile.group
+                                .trim();
+
+                            final String subtitleText;
+                            if (isYou) {
+                              subtitleText = userGroup.isNotEmpty
+                                  ? 'Group: $userGroup (tap to change)'
+                                  : 'No group assigned (tap to set in Profile)';
+                            } else {
+                              subtitleText = 'Community tester';
+                            }
+
+                            final String badgeText;
+                            if (userGroup.isNotEmpty) {
+                              badgeText = 'You · $userGroup';
+                            } else {
+                              badgeText = 'You';
+                            }
 
                             return ListTile(
                               leading: CircleAvatar(
@@ -415,15 +438,17 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ),
                               subtitle: Text(
-                                isYou
-                                    ? (widget.arguments.profile.group.isNotEmpty
-                                          ? 'Group: ${widget.arguments.profile.group}'
-                                          : 'Registered tester')
-                                    : 'Community tester',
+                                subtitleText,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: theme.colorScheme.onSurfaceVariant,
                                 ),
                               ),
+                              onTap: isYou
+                                  ? () {
+                                      widget.arguments.onSwitchToProfileTab();
+                                      Navigator.of(context).pop();
+                                    }
+                                  : null,
                               trailing: isYou
                                   ? Container(
                                       padding: const EdgeInsets.symmetric(
@@ -436,13 +461,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
-                                        widget
-                                                .arguments
-                                                .profile
-                                                .group
-                                                .isNotEmpty
-                                            ? 'You · ${widget.arguments.profile.group}'
-                                            : 'You',
+                                        badgeText,
                                         style: theme.textTheme.labelSmall
                                             ?.copyWith(
                                               color: theme

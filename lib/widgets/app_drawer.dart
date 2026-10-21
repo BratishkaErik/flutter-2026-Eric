@@ -80,6 +80,14 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final hasProfile = profile.name.trim().isNotEmpty;
+    final String groupText;
+    if (!hasProfile) {
+      groupText = 'Not registered as tester';
+    } else if (profile.group.isNotEmpty) {
+      groupText = 'Group: ${profile.group}';
+    } else {
+      groupText = 'No group code assigned';
+    }
 
     return Drawer(
       child: ListView(
@@ -113,9 +121,7 @@ class AppDrawer extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  hasProfile && profile.group.isNotEmpty
-                      ? 'Group: ${profile.group}'
-                      : 'Not registered as tester',
+                  groupText,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onPrimaryContainer,
                   ),
