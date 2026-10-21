@@ -414,6 +414,16 @@ class _DetailScreenState extends State<DetailScreen> {
                                       : FontWeight.normal,
                                 ),
                               ),
+                              subtitle: Text(
+                                isYou
+                                    ? (widget.arguments.profile.group.isNotEmpty
+                                          ? 'Group: ${widget.arguments.profile.group}'
+                                          : 'Registered tester')
+                                    : 'Community tester',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
                               trailing: isYou
                                   ? Container(
                                       padding: const EdgeInsets.symmetric(
@@ -426,7 +436,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
-                                        'You',
+                                        widget
+                                                .arguments
+                                                .profile
+                                                .group
+                                                .isNotEmpty
+                                            ? 'You · ${widget.arguments.profile.group}'
+                                            : 'You',
                                         style: theme.textTheme.labelSmall
                                             ?.copyWith(
                                               color: theme
