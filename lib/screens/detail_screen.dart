@@ -188,10 +188,10 @@ class _DetailScreenState extends State<DetailScreen> {
       statusLabel = 'FULL';
     } else if (free <= 5) {
       progressColor = theme.colorScheme.tertiary;
-      statusLabel = '$free spots left';
+      statusLabel = '$free left';
     } else {
       progressColor = theme.colorScheme.primary;
-      statusLabel = '$free available';
+      statusLabel = '${(progressValue * 100).round()}%';
     }
 
     final VoidCallback? primaryAction;
@@ -371,30 +371,29 @@ class _DetailScreenState extends State<DetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.pie_chart_outline,
-                                          size: 20,
-                                          color: progressColor,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          'Beta Tester Capacity',
-                                          style: theme.textTheme.titleMedium
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                      ],
+                                    Icon(
+                                      Icons.pie_chart_outline,
+                                      size: 20,
+                                      color: progressColor,
                                     ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        'Beta Capacity',
+                                        style: theme.textTheme.titleMedium
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
                                     Container(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 8,
-                                        vertical: 4,
+                                        vertical: 3,
                                       ),
                                       decoration: BoxDecoration(
                                         color: progressColor.withAlpha(35),
@@ -428,15 +427,20 @@ class _DetailScreenState extends State<DetailScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      '$taken of ${_app.limit} testers enrolled',
-                                      style: theme.textTheme.bodySmall
-                                          ?.copyWith(
-                                            color: theme
-                                                .colorScheme
-                                                .onSurfaceVariant,
-                                          ),
+                                    Expanded(
+                                      child: Text(
+                                        '$taken of ${_app.limit} enrolled',
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(
+                                              color: theme
+                                                  .colorScheme
+                                                  .onSurfaceVariant,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
+                                    const SizedBox(width: 8),
                                     Text(
                                       '$free free',
                                       style: theme.textTheme.bodySmall
