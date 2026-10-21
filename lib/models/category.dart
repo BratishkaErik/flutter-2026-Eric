@@ -17,8 +17,8 @@ enum AppCategory {
       AppCategory.games => colorScheme.primary,
       AppCategory.productivity => colorScheme.secondary,
       AppCategory.social => colorScheme.tertiary,
-      AppCategory.education => colorScheme.error,
-      AppCategory.utilities => colorScheme.primaryContainer,
+      AppCategory.education => colorScheme.secondaryContainer,
+      AppCategory.utilities => colorScheme.tertiaryContainer,
     };
   }
 
@@ -27,8 +27,8 @@ enum AppCategory {
       AppCategory.games => colorScheme.onPrimary,
       AppCategory.productivity => colorScheme.onSecondary,
       AppCategory.social => colorScheme.onTertiary,
-      AppCategory.education => colorScheme.onError,
-      AppCategory.utilities => colorScheme.onPrimaryContainer,
+      AppCategory.education => colorScheme.onSecondaryContainer,
+      AppCategory.utilities => colorScheme.onTertiaryContainer,
     };
   }
 }

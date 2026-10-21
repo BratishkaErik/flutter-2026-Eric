@@ -209,7 +209,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   decoration: const InputDecoration(
                     labelText: 'Tester Group Code (Optional)',
                     hintText: 'e.g. QA-2026, DEV-01',
-                    helperText: 'Optional. 2–10 characters, letter-number format (e.g. QA-2026, CS-21). Can be updated at any time.',
+                    helperText: 'Optional. 2–10 characters, letter-number format (e.g. QA-2026, CS-21).',
                     helperMaxLines: 2,
                     prefixIcon: Icon(Icons.badge_outlined),
                   ),
@@ -247,7 +247,7 @@ class _ProfileTabState extends State<ProfileTab> {
             spacing: 10.0,
             children: [
               ChoiceChip(
-                avatar: const Icon(Icons.brightness_auto, size: 16),
+                avatar: const Icon(Icons.brightness_auto, size: 18),
                 label: const Text('System'),
                 selected: widget.themeMode == ThemeMode.system,
                 onSelected: (selected) {
@@ -257,7 +257,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 },
               ),
               ChoiceChip(
-                avatar: const Icon(Icons.light_mode, size: 16),
+                avatar: const Icon(Icons.light_mode, size: 18),
                 label: const Text('Light'),
                 selected: widget.themeMode == ThemeMode.light,
                 onSelected: (selected) {
@@ -267,7 +267,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 },
               ),
               ChoiceChip(
-                avatar: const Icon(Icons.dark_mode, size: 16),
+                avatar: const Icon(Icons.dark_mode, size: 18),
                 label: const Text('Dark'),
                 selected: widget.themeMode == ThemeMode.dark,
                 onSelected: (selected) {
