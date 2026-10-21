@@ -14,21 +14,21 @@ enum AppCategory {
 
   Color color(ColorScheme colorScheme) {
     return switch (this) {
-      AppCategory.games => colorScheme.primary,
-      AppCategory.productivity => colorScheme.secondary,
-      AppCategory.social => colorScheme.tertiary,
-      AppCategory.education => colorScheme.secondaryContainer,
-      AppCategory.utilities => colorScheme.tertiaryContainer,
+      AppCategory.games => colorScheme.primaryFixed,
+      AppCategory.productivity => colorScheme.secondaryFixed,
+      AppCategory.social => colorScheme.tertiaryFixed,
+      AppCategory.education => colorScheme.primaryFixedDim,
+      AppCategory.utilities => colorScheme.secondaryFixedDim,
     };
   }
 
   Color onColor(ColorScheme colorScheme) {
     return switch (this) {
-      AppCategory.games => colorScheme.onPrimary,
-      AppCategory.productivity => colorScheme.onSecondary,
-      AppCategory.social => colorScheme.onTertiary,
-      AppCategory.education => colorScheme.onSecondaryContainer,
-      AppCategory.utilities => colorScheme.onTertiaryContainer,
+      AppCategory.games => colorScheme.onPrimaryFixed,
+      AppCategory.productivity => colorScheme.onSecondaryFixed,
+      AppCategory.social => colorScheme.onTertiaryFixed,
+      AppCategory.education => colorScheme.onPrimaryFixedVariant,
+      AppCategory.utilities => colorScheme.onSecondaryFixedVariant,
     };
   }
 }

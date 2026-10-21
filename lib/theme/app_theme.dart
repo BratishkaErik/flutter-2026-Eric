@@ -9,6 +9,7 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: _seedColor,
         brightness: Brightness.light,
+        dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
       ),
       appBarTheme: const AppBarTheme(centerTitle: false),
     );
@@ -20,6 +21,7 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: _seedColor,
         brightness: Brightness.dark,
+        dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
       ),
       appBarTheme: const AppBarTheme(centerTitle: false),
     );
