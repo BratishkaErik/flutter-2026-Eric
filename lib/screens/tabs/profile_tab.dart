@@ -205,10 +205,11 @@ class _ProfileTabState extends State<ProfileTab> {
                   controller: _groupController,
                   focusNode: _groupFocusNode,
                   textInputAction: TextInputAction.done,
+                  maxLength: 10,
                   decoration: const InputDecoration(
                     labelText: 'Tester Group Code (Optional)',
                     hintText: 'e.g. QA-2026, DEV-01',
-                    helperText: 'Optional. Letter-number format (e.g. QA-2026, CS-21). Can be updated at any time.',
+                    helperText: 'Optional. 2–10 characters, letter-number format (e.g. QA-2026, CS-21). Can be updated at any time.',
                     helperMaxLines: 2,
                     prefixIcon: Icon(Icons.badge_outlined),
                   ),
@@ -220,7 +221,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       return null;
                     }
                     if (!_groupRegExp.hasMatch(text)) {
-                      return 'Use letter-number format (e.g. QA-2026, CS-21)';
+                      return 'Must be 2–10 characters, letter-number format (e.g. QA-2026, CS-21)';
                     }
                     return null;
                   },
